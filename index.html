@@ -234,7 +234,8 @@ for (i = 0; i < 21; i++) {
     format = '.JPG';
   var item = i + 1;
   var imgSrc = '/img/' + item + format;
-  var imgWidth = screen.width / 3.2;
+  var imgWidth = screen.width / 3.5;
+  imgWidth = '30vw';
   var imgTag = $('<img />');
   imgTag.attr('src', imgSrc);
   imgTag.css('width', imgWidth +"px");
