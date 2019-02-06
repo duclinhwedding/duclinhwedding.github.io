@@ -104,6 +104,18 @@ padding-right: 0;
     margin: 0 auto;
 }
 
+body {
+  background-color: #1D1F20;
+}
+
+#masonryGrid .grid {
+  margin: 0 auto;
+}
+#masonryGrid .grid .grid-item {
+  margin: 0.5rem;
+}
+
+
 </style>
 
 </head>
@@ -145,7 +157,7 @@ Nhà Hàng Tiệc Cưới Hoàng Gia 2
     
     </div>
     
-  </div><div class="container-fluid">
+  </div><div class="container-fluid container2">
 
     <div class="dblock dblock-2 story">
 
@@ -206,6 +218,49 @@ Nhà Hàng Tiệc Cưới Hoàng Gia 2
 </div>
 
 
+<script>
+  
+function renderGallery () {
+
+var ctn = $('<div id="masonryGrid" />');
+var grid = $('<div class="grid" />');
+ctn.append(grid);
+var i;
+for (i = 0; i < 21; i++) { 
+  var gridItem = $('<div class="grid-item" />');
+  var format = '.jpg';
+  if(i==0)
+    format = '.JPG';
+  var item = i + 1;
+  var imgSrc = '/img/' + item + format;
+  var imgWidth = screen.width / 3.2;
+  var imgTag = $('<img />');
+  imgTag.attr('src', imgSrc);
+  imgTag.css('width', imgWidth +"px");
+  gridItem.append(imgTag);
+  grid.append(gridItem);
+
+
+}
+$('.container2').append(ctn);
+
+var $grid = $('.grid').masonry({
+  // options...
+  itemSelector: '.grid-item',
+  isFitWidth: true,
+  columnWidth: 1
+});
+
+
+}
+
+$(function() {
+renderGallery();
+});
+
+
+
+</script>
 
 
 
