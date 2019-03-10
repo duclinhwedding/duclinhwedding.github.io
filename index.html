@@ -346,6 +346,9 @@ for (i = 0; i < 21; i++) {
   gridItem.append(imgTag);
   grid.append(gridItem);
 
+  if(item == 21) {
+
+  }
 
 }
 $('.gallery-ctn').append(ctn);
@@ -357,19 +360,18 @@ var $grid = $('.grid').masonry({
   columnWidth: 1
 });
 
-$grid.imagesLoaded().progress( function() {
+$grid.imagesLoaded().progress( function(item) {
+    console.log(item);
   $grid.masonry('layout');
+    
 });
 
 }
 
-$(function() {
-
-renderGallery();
-init();
+$(window).on("load", function() {
+    init();
+    renderGallery();
 });
-
-
 
 </script>
 
