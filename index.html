@@ -29,7 +29,8 @@
     position: absolute;top: 50%;
       /* position the top  edge of the element at the middle of the parent */
       left: 50%; /* position the left edge of the element at the middle of the parent */
-      transform: translate(-50%, -50%); /* This is a shorthand of                                          translateX(-50%) and translateY(-50%) */color: #fff;text-align: center;}
+      transform: translate(-50%, -50%); /* This is a shorthand of                                          translateX(-50%) and translateY(-50%) */color: #fff;text-align: center;
+      }
 
 h1.wedding-event-title {
     font: normal normal normal snellroundhandw01-scrip,cursive;
@@ -131,6 +132,23 @@ body {
 
 }
 
+.loader-ctn {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+.loader-icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+}
+
+.loader-icon img {
+    height: 50px;
+}
+
 .cd-block {
     display: inline-block;
     margin: 10px;
@@ -155,7 +173,13 @@ body {
 
 <body>
 
-<div class="main-ctn">
+<div class="loader-ctn">
+    <div class="loader-icon"> <img src="/img/heart.gif" /></div>
+   
+
+</div>
+
+<div class="main-ctn" style="display:none">
   
   <div class="container-fluid">
   
@@ -286,7 +310,7 @@ var end = new Date('03/24/2019 05:30 AM');
         document.getElementById('countdown').innerHTML += secblock;
     }
 
-    timer = setInterval(showRemaining, 1000);
+  
 
 
 </script>
@@ -294,6 +318,13 @@ var end = new Date('03/24/2019 05:30 AM');
 
 <script>
   
+function init(){
+    $('.loader-ctn').remove();
+    $('.main-ctn').fadeIn('slow');
+      timer = setInterval(showRemaining, 1000);
+
+};
+
 function renderGallery () {
 
 var ctn = $('<div id="masonryGrid" />');
@@ -333,7 +364,9 @@ $grid.imagesLoaded().progress( function() {
 }
 
 $(function() {
+
 renderGallery();
+init();
 });
 
 
