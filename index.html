@@ -23,12 +23,18 @@
     position: relative;
 }
 
-.wedding-event {position: absolute;top: 50%;  /* position the top  edge of the element at the middle of the parent */left: 50%; /* position the left edge of the element at the middle of the parent */transform: translate(-50%, -50%); /* This is a shorthand of                                          translateX(-50%) and translateY(-50%) */color: #fff;text-align: center;}
+.wedding-event {
+    width: 100%;
+  
+    position: absolute;top: 50%;
+      /* position the top  edge of the element at the middle of the parent */
+      left: 50%; /* position the left edge of the element at the middle of the parent */
+      transform: translate(-50%, -50%); /* This is a shorthand of                                          translateX(-50%) and translateY(-50%) */color: #fff;text-align: center;}
 
 h1.wedding-event-title {
-    font: normal normal normal 34px/1.4em snellroundhandw01-scrip,cursive;
+    font: normal normal normal snellroundhandw01-scrip,cursive;
     display: inline-block;
-    font-size: 30px;
+    font-size: 3vw;
 }
 
 .dasher {
@@ -38,7 +44,7 @@ h1.wedding-event-title {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 7px;
-    display: inline-block;
+    display: none;
 }
 
 span.divider {
@@ -52,7 +58,8 @@ span.divider {
 
 .wedding-event-blast {
     text-transform: uppercase;
-    font-size: 44px;
+     font: normal normal normal snellroundhandw01-scrip,cursive;
+    font-size: 3vw;
 }
 
 .wedding-event-location {
@@ -70,8 +77,9 @@ padding-right: 0;
 }
 
 .dblock.dblock-2.story {
-    color: #33424E;
+    color: #fff;
     text-align: center;
+    padding: 10px;
 }
 
 
@@ -84,7 +92,8 @@ padding-right: 0;
 
 .story-when-title {
     font-size: 25px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .story-desc {
@@ -94,7 +103,8 @@ padding-right: 0;
 
 .story-where-title {
     font-size: 25px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .story-when-desc {
@@ -114,6 +124,28 @@ body {
 }
 #masonryGrid .grid .grid-item {
   margin: 0.5rem;
+}
+
+.dblock.map {
+    padding-bottom: 100px;
+
+}
+
+.cd-block {
+    display: inline-block;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.cd-block span {
+    display: block;
+}
+
+.cd-block .cd-val {
+    background: #000000c4;
+    width: 50px;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 
@@ -143,14 +175,8 @@ We are getting married
 
 
 </div>
-<div class="wedding-event-location" style="
-">
-    <span>Mar 24, 5:00 PM</span>
-   <span class="divider" style="
-">&nbsp;</span> 
-    <span>
-Nhà Hàng Tiệc Cưới Hoàng Gia 2
-        </span>
+<div class="wedding-event-location">
+   <div id="countdown"></div>
         </div>
 </div>
 <img src="/img/1.JPG" class="img-responsive">
@@ -197,7 +223,7 @@ Nhà Hàng Tiệc Cưới Hoàng Gia 2
   <div class="story-where-desc" style="
 ">Nhà Hàng Tiệc Cưới Hoàng Gia 2
 <br>
-    Ngõ 74 Phố Nguyễn Thị Định, Nhân Chính, Thanh Xuân, Hà Nội, Vietnam
+    Số 39 - Ngõ 74 Phố Nguyễn Thị Định, Nhân Chính, Thanh Xuân, Hà Nội, Vietnam
 </div>
 
 </div>
@@ -209,7 +235,7 @@ Nhà Hàng Tiệc Cưới Hoàng Gia 2
 
 
 </div><div class="dblock map">
-<div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=nha%20hang%20tiec%20cuoi%20hoang%20gia%202&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{text-align:right;height:100%;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}</style></div>
+<div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=nha%20hang%20tiec%20cuoi%20hoang%20gia%202&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{text-align:right;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;}</style></div>
 
 </div>
 
@@ -217,6 +243,49 @@ Nhà Hàng Tiệc Cưới Hoàng Gia 2
 
 
 </div>
+
+<script>
+
+
+var end = new Date('03/24/2019 05:30 AM');
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = '<3';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+
+		var dayblock = '<div class="cd-block cd-block-day"><span class="cd-val">' + days + '</span><span class="cd-label"> DAYS</span></div>';
+		var hourblock = '<div class="cd-block cd-block-hr"><span class="cd-val">' + hours + '</span><span class="cd-label"> HOURS</span></div>';
+		var minblock = '<div class="cd-block cd-block-min"><span class="cd-val">' + minutes + '</span><span class="cd-label"> MINUTES</span></div>';
+		var secblock = '<div class="cd-block cd-block-sec"><span class="cd-val">' + seconds + '</span><span class="cd-label"> SECONDS</span></div>';
+
+
+        document.getElementById('countdown').innerHTML = dayblock;
+        document.getElementById('countdown').innerHTML += hourblock;
+        document.getElementById('countdown').innerHTML += minblock;
+        document.getElementById('countdown').innerHTML += secblock;
+    }
+
+    timer = setInterval(showRemaining, 1000);
+
+
+</script>
 
 
 <script>
