@@ -367,8 +367,13 @@ var end = new Date('03/24/2019 04:30 PM');
 <script>
   
 function init(){
-    $('.loader-ctn').remove();
+
+setTimeout(function(){ 
+     $('.loader-ctn').remove();
     $('.main-ctn').fadeIn('slow');
+     }, 3000);
+
+
       timer = setInterval(showRemaining, 1000);
 
 };
