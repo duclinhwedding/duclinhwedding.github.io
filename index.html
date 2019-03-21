@@ -1,6 +1,7 @@
 <html><head>
 <title>Duc and Linh Wedding</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
@@ -10,13 +11,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=latin" media="all">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=latin" media="all">
 
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <style>
     html, body, .main-ctn {
         color: #33424E;
         width: 100%;
-        height: 100%;
-        
+        height: 100%;        
     }
+
+#slider-ctn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: #33424E;
+}
 
 
  .dblock.dblock-1 {
@@ -46,6 +60,29 @@ h1.wedding-event-title {
     margin-right: 20px;
     margin-bottom: 7px;
     display: none;
+}
+
+button.slick-prev.slick-arrow {
+    position: absolute;
+    width: 80px;
+    top: 50%;
+    background: #000;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+button.slick-next.slick-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 80px;
+    background: #000;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 span.divider {
@@ -143,6 +180,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);    
+}
+
+
+#slider-ctn img {
+  height: calc(50vh - 100px);
+  width: auto;
+  margin: 0 auto; /* it centers any block level element */
 }
 
 .loader-icon img {
@@ -269,13 +313,17 @@ We are getting married
 
 </div>
 
-
 </div>
+
+
+<div id="slider-ctn"></div>
+
+
 
 <script>
 
 
-var end = new Date('03/24/2019 05:30 AM');
+var end = new Date('03/24/2019 04:30 PM');
 
     var _second = 1000;
     var _minute = _second * 60;
@@ -286,7 +334,7 @@ var end = new Date('03/24/2019 05:30 AM');
     function showRemaining() {
         var now = new Date();
         var distance = end - now;
-        if (distance < 0) {
+        if (distance < 0 || 1==1) {
 
             clearInterval(timer);
             document.getElementById('countdown').innerHTML = '<3';
@@ -325,6 +373,42 @@ function init(){
 
 };
 
+function renderSlider() {
+var i;
+for (i = 0; i < 21; i++) { 
+  var gridItem = $('<div class="slide-item" />');
+  var format = '.jpg';
+  if(i==0)
+    format = '.JPG';
+  var item = i + 1;
+  var imgSrc = '/img/' + item + format;
+  var imgWidth = screen.width / 3.5;
+  //imgWidth = '30vw';
+  var imgTag = $('<img />');
+  imgTag.attr('src', imgSrc);
+  imgTag.css('width', 'unset');
+  imgTag.css('height', "100%");
+  imgTag.css('margin', '0 auto');
+  gridItem.append(imgTag);
+  $('#slider-ctn').append(gridItem);
+   $('#slider-ctn').hide();
+
+}
+    var slickOpts = {
+        //dots: true,
+centerMode:true,
+slideToShow: 1,
+   
+    };
+
+    // Init the slick    
+    $('#slider-ctn').slick(slickOpts);
+
+
+
+}
+
+
 function renderGallery () {
 
 var ctn = $('<div id="masonryGrid" />');
@@ -344,13 +428,15 @@ for (i = 0; i < 21; i++) {
   imgTag.attr('src', imgSrc);
   imgTag.css('width', imgWidth);
   gridItem.append(imgTag);
+  gridItem.on('click', function() {
+       // $('#slider-ctn').show();
+       //("#slider-ctn").slick('slickNext');
+
+  });
   grid.append(gridItem);
 
-  if(item == 21) {
-
-  }
-
 }
+
 $('.gallery-ctn').append(ctn);
 
 var $grid = $('.grid').masonry({
@@ -361,7 +447,6 @@ var $grid = $('.grid').masonry({
 });
 
 $grid.imagesLoaded().progress( function(item) {
-    console.log(item);
   $grid.masonry('layout');
     
 });
@@ -371,6 +456,7 @@ $grid.imagesLoaded().progress( function(item) {
 $(window).on("load", function() {
     init();
     renderGallery();
+    renderSlider();
 });
 
 </script>
