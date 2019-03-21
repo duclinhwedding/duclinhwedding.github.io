@@ -23,6 +23,7 @@
     }
 
 #slider-ctn {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -371,6 +372,8 @@ function init(){
 setTimeout(function(){ 
      $('.loader-ctn').remove();
     $('.main-ctn').fadeIn('slow');
+     renderGallery();
+    renderSlider();   
      }, 3000);
 
 
@@ -460,8 +463,7 @@ $grid.imagesLoaded().progress( function(item) {
 
 $(window).on("load", function() {
     init();
-    renderGallery();
-    renderSlider();
+
 });
 
 </script>
